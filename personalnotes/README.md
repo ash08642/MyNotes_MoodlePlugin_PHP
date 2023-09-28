@@ -1,9 +1,9 @@
 # Personal Notes #
 
 ## Functionality
-- Form for users or admins to add new notes or notifications
-- Store read messages for users, do not display twice.
-- Store notifications in database.
+- Form for users or admins to add new notes.
+- Store and read notes for all users.
+- Store your notes in a database.
 
 ## Installing via uploaded ZIP file ##
 
