@@ -1,0 +1,127 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_boost/admin_setting_tabs
+
+
+    Example context (json):
+    {
+
+    }
+}}
+<h1>List of My Notes</h1>
+{{#notes}}
+<div class="out{{notetype}}">
+    <div class="in{{notetype}}">
+        <div id='card{{id}}' class='myNote-main'>
+            <h4>{{course}} :</h4>
+            <p class="notetext">{{notetext}}</p>
+            <button type="button" class='edit{{id}} notebutton' onclick="hidenshow{{id}}()">Edit Note</button>
+            <form class="deleteform" action='{{currenturl}}' method='get'>
+                <input type="hidden" id='deleteid' name='deleteid' value={{id}}>
+                <button type="submit" class='delete{{id}} negativenotebutton'>Delete Note</button>
+            </form>
+        </div>
+        <form id='editForm{{id}}' action='{{currenturl}}' method="post">
+            <label class='formlabel' for="notetext">Note:</label>
+            <input type="text" id="editid" name="editid" value='{{id}}'>
+            <textarea class="textarea{{id}}" id="notetext" name="notetext" rows="4" cols="75">{{notetext}}</textarea>
+            <div class="box">
+                <label class="noteLabel" for="course">Select Course</label>
+                <select name="course" id="course">
+                <option value="{{course}}" selected disabled hidden>
+                    {{course}}
+                </option>
+                <option value='General'>General</option>
+                    {{#courses}}
+                    <option value='{{fullname}}'>{{fullname}}</option>
+                    {{/courses}}
+                </select>
+            </div>
+            <div class="box">
+                <label class="noteLabel" for="notetype">Type of Note</label>
+                <select value='{{notetype}}' name="notetype" id="notetype">
+                    <option value="{{notetype}}" selected disabled hidden>
+                        {{notetype}}
+                    </option>
+                    <option value="Quick Note">Quick Note</option>
+                    <option value="Important">Important</option>
+                    <option value="Progress Information">Progress Information</option>
+                    <option value="Reminder">Reminder</option>
+                    <option value="To Do">To Do</option>
+                </select>
+            </div>
+            </br>
+            <button class='save{{id}} notebutton' type="submit">Save Changes</button>
+            <button class='cancel{{id}} negativenotebutton' type="button" onclick="shownhide{{id}}()">Cancel Changes</button>
+        </form>
+        <script>
+            function hidenshow{{id}}(){
+                var card = document.getElementById('card{{id}}');
+                card.style.display = "none";
+                var form = document.getElementById('editForm{{id}}');
+                form.style.display = "block";
+            }
+            function shownhide{{id}}(){
+                var card = document.getElementById('card{{id}}');
+                card.style.display = "block";
+                var form = document.getElementById('editForm{{id}}');
+                form.style.display = "none";
+            }
+        </script>
+        <style>
+        .Note{{id}}{
+            border-radius: 10px;
+            padding: 10px;
+            border: 2px solid #ffbbbb;
+            width: 90%;
+            margin: 10px;
+        }
+        .save{{id}}{
+            margin-top: 20px;
+            background-color = #ff0000;
+        }
+        .cancel{{id}}{
+            margin-top: 20px;
+            background-color = #ff0000;
+        }
+        #editForm{{id}}{
+            margin-left: 20px;
+            display: none;
+        }
+        .textarea{{id}}{
+            display: block;
+            overflow: auto;
+            max-width: 100%;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #fbff00;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        #editid{
+            display: none;
+        }
+        </style>
+    </div>
+</div>
+{{/notes}}
+
+<hr>
+<input type="button" class="btn btn-primary" value="Make a Note" onclick="location.href='{{editurl}}'">

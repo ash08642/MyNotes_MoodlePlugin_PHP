@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/personalnotes/db" VERSION="20200213" COMMENT="XMLDB file for local personal notes"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_personalnotes" COMMENT="each record is a note">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="course" TYPE="text" LENGTH="10" NOTNULL="true" DEFAULT="Genral" SEQUENCE="false"/>
+        <FIELD NAME="notetext" TYPE="text" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="notetype" TYPE="text" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timeadded" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="local_primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
